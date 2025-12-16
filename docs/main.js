@@ -31,3 +31,14 @@ function loop() {
   render(ctx, game);
   requestAnimationFrame(loop);
 }
+
+window.addEventListener("keydown", e => {
+  if (game?.choices) {
+    const i = parseInt(e.key) - 1;
+    if (game.choices[i]) {
+      game.choices[i].apply();
+      game.choices = null;
+    }
+  }
+  input[e.key.toLowerCase()] = true;
+});
