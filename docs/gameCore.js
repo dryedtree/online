@@ -33,17 +33,27 @@ export function updateGame(game, input) {
 
   // 攻撃
   p.cooldown -= 16;
-  if (p.cooldown <= 0) {
-    game.enemies.forEach(e => {
-      const dx = e.x - p.x;
-      const dy = e.y - p.y;
-      const d = Math.hypot(dx, dy);
-      if (d < p.range) {
-        e.hp -= p.damage;
-        p.cooldown = p.rate;
-      }
-    });
-  }
+if (p.cooldown <= 0) {
+  game.enemies.forEach(e => {
+    const dx = e.x - p.x;
+    const dy = e.y - p.y;
+    const d = Math.hypot(dx, dy);
+
+    if (d < p.range) {
+      e.hp -= p.damage;
+      p.cooldown = p.rate;
+
+      // ★攻撃エフェクト生成
+      game.effects.push({
+        x: e.x,
+        y: e.y,
+        r: p.weapon === "evolved" ? 20 : 12,
+        life: 15,
+        color: p.weapon === "evolved" ? "orange" : "yellow"
+      });
+    }
+  });
+}
 
   // 敵死亡 → 経験値
   game.enemies = game.enemies.filter(e => {
