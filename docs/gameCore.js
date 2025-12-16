@@ -105,3 +105,39 @@ export function updateGame(game, input) {
     if (d < 20) p.hp -= 0.1;
   });
 }
+
+
+function gainExp(game, amount) {
+  const p = game.player;
+  p.exp += amount;
+  if (p.exp >= p.nextExp) {
+    p.exp -= p.nextExp;
+    p.level++;
+    p.nextExp += 5;
+    game.choices = generateChoices(p);
+  }
+}
+
+function generateChoices(p) {
+  const pool = [
+    { text: "攻撃力UP", apply: () => p.damage += 3 },
+    { text: "攻撃速度UP", apply: () => p.rate *= 0.85 },
+    { text: "範囲UP", apply: () => p.range += 15 },
+    { text: "移動速度UP", apply: () => p.speed += 0.3 },
+    { text: "HP回復", apply: () => p.hp = Math.min(p.maxHp, p.hp + 30) }
+  ];
+
+  // 武器進化条件
+  if (p.weapon === "basic" && p.level >= 5) {
+    pool.push({
+      text: "武器進化：上位武器",
+      apply: () => {
+        p.weapon = "evolved";
+        p.damage *= 2;
+        p.range += 30;
+      }
+    });
+  }
+
+  return pool.sort(() => 0.5 - Math.random()).slice(0, 3);
+}
