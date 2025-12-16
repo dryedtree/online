@@ -50,6 +50,13 @@ function updateGame(game, input) {
 if (Math.random() < 0.02) {
   spawnEnemy(game);
 }
+game.enemies.forEach(e => {
+  const dx = game.player.x - e.x;
+  const dy = game.player.y - e.y;
+  const d = Math.hypot(dx, dy) || 1;
+  e.x += (dx / d) * e.speed;
+  e.y += (dy / d) * e.speed;
+});
 
 function spawnEnemy(game) {
   game.enemies.push({
