@@ -46,6 +46,10 @@ function updateGame(game, input) {
 
   game.effects = game.effects.filter(e => --e.life > 0);
 }
+// 敵を定期的に出現させる
+if (Math.random() < 0.02) {
+  spawnEnemy(game);
+}
 
 function spawnEnemy(game) {
   game.enemies.push({
