@@ -117,6 +117,12 @@ if (p.cooldown <= 0) {
   });
 }
 
+game.effects = game.effects.filter(e => {
+  e.r += 1;
+  e.life--;
+  return e.life > 0;
+});
+
 
 function gainExp(game, amount) {
   const p = game.player;
