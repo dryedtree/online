@@ -46,3 +46,12 @@ function updateGame(game, input) {
 
   game.effects = game.effects.filter(e => --e.life > 0);
 }
+
+function spawnEnemy(game) {
+  game.enemies.push({
+    x: Math.random() * 800,
+    y: Math.random() * 600,
+    hp: 30,
+    speed: 1.2
+  });
+}
