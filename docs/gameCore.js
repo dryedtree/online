@@ -4,12 +4,20 @@ export function createGame(character) {
       x: 400,
       y: 300,
       hp: character.hp,
-      ...character,
+      maxHp: character.hp,
+      speed: character.speed,
+      rate: character.rate,
+      range: character.range,
+      damage: character.damage,
+      weapon: "basic",
+      level: 1,
+      exp: 0,
+      nextExp: 10,
       cooldown: 0
     },
     enemies: [],
-    bullets: [],
-    time: 0
+    expOrbs: [],
+    choices: null
   };
 }
 
