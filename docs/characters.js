@@ -1,4 +1,4 @@
-export const CHARACTERS = {
+const CHARACTERS = {
   knight: { hp: 150, speed: 2, rate: 800, range: 40, damage: 15 },
   rogue:  { hp: 90, speed: 3.5, rate: 400, range: 30, damage: 10 },
   mage:   { hp: 70, speed: 2, rate: 1200, range: 90, damage: 20 },
