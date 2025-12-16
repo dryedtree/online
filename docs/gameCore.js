@@ -17,6 +17,7 @@ export function createGame(character) {
     },
     enemies: [],
     expOrbs: [],
+    effects: [],   // ★追加
     choices: null
   };
 }
